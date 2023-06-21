@@ -1,3 +1,5 @@
+{% load last_message %}
+
 <h4 class="mt-2 mb-3">Users</h4>
 <div class="user-list">
   {% for user in users %}
@@ -6,7 +8,7 @@
         <div class="avatar d-flex align-items-center justify-content-center fw-bold text-white">{{user.username|upper|first}}</div>
         <div>
           <span class="name d-block">{{user}}</span>
-          <span id="last-message" class="message d-block">Last message goes here</span>
+          <span id="last-message" class="message d-block">{{user|last_message:request.user}}</span>
         </div>
       </div>
     </a>
