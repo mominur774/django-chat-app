@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-8 col-md-10 col-sm-12 mx-auto shadow rounded pb-5">
+    <form class="row" action="" method="post">
+      {% csrf_token %}
+      <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+        <h3 class="mt-3 mb-5 text-center">Register</h3>
+        {% for field in form %}
+          <div class="form-group mb-3">
+            <label for="{{field.label}}" class="form-label">{{field.label}}</label>
+            {{field}}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary w-100 mt-2">Login</button>
+        <span class="d-block mt-3">Already have an account? <a href="{% url 'login' %}">Login</a></span>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

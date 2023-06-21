@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-8 col-md-10 col-sm-12 mx-auto shadow chat-box rounded">
+    <div class="row">
+      <div class="col-lg-4 ">
+        {% include 'core/user-list.html' %}
+      </div>
+      <div class="col-lg-8 chat px-3">
+        <div id="chat-log" class="chat-log scroll">
+          {% for chat in chats %}
+            <div 
+              class="message mb-2 {% if chat.sender == request.user %}right{% else %}left{% endif %}"
+            >
+              <div class="avatar">{{chat.sender.username|first|upper}}</div>
+              <span class="d-block">{{chat.message}}</span>
+            </div>
+          {% endfor %}
+        </div>
+        <form method="post" class="input-box d-flex w-100">
+            {% csrf_token %}
+            <input type="text" id="chat-message-input" class="form-control" name="" id="">
+            <button id="chat-message-submit" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block extra_js %}
+
+<script>
+
+  let chatLog = document.getElementById('chat-log');
+  let messageInput = document.getElementById('chat-message-input');
+  let messageSubmit = document.getElementById('chat-message-submit');
+  let lastMessage = document.getElementById('last-message');
+  let roomName = "{{room_name}}";
+  let user = "{{request.user.username}}"
+
+
+  const chatSocket = new WebSocket(
+    `ws://${window.location.host}/ws/chat/${roomName}/`
+  )
+
+  chatSocket.onmessage = e => {
+    const data = JSON.parse(e.data);
+    var html = `
+      <div class="message mb-2 ${data.sender === user ? 'right' : 'left'}">
+        <div class="avatar">${data.sender[0].toUpperCase()}</div>
+        <span class="d-block">${data.message}</span>
+      </div>
+    `;
+    chatLog.insertAdjacentHTML("beforeend", html);
+    lastMessage
+  }
+
+  chatSocket.onclose = e => {
+    console.error('Chat socket closed unexpectedly');
+  }
+
+  messageSubmit.disabled = true;
+  messageInput.addEventListener('input', function() {
+    if (messageInput.value.trim() !== '') {
+      messageSubmit.disabled = false;
+    } else {
+      messageSubmit.disabled = true;
+    }
+  })
+
+  messageInput.focus();
+  messageSubmit.onclick = e => {
+    const message = messageInput.value;
+    chatSocket.send(JSON.stringify({
+      'message': message
+    }));
+    messageInput.value = '';
+  }
+
+
+  chatLog.addEventListener('scroll', function() {
+    chatLog.classList.add('scroll');
+  });
+  setTimeout(function() {
+    chatLog.classList.remove('scroll');
+  }, 1000);
+
+
+</script>
+
+{% endblock extra_js %}

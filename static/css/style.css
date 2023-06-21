@@ -1,0 +1,140 @@
+.chat-box {
+  height: 85vh;
+}
+
+.chat-box .chat {
+  position: relative;
+  background: transparent;
+  height: 85vh;
+  background: #eee;
+}
+
+.chat-box .chat .chat-log {
+  overflow-y: scroll;
+  height: 76vh;
+  padding: 15px 7px;
+  margin-bottom: 5px;
+}
+
+.chat-box .chat .chat-log::-webkit-scrollbar {
+  width: 0px;
+}
+
+.chat-box .chat .chat-log.scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chat-box .chat .chat-log.scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-box .chat .chat-log.scroll::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.chat-box .chat .chat-log.scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.chat-box .chat .input-box {}
+
+.chat-box .chat .input-box input[type="text"] {
+  padding: 10px;
+  width: 85%;
+  border-radius: 0;
+  border: 1px solid #b5b2b2;
+}
+
+.chat-box .chat .input-box button {
+  background: #FFFFFF;
+  border: 1px solid #b5b2b2;
+  width: 15%;
+}
+
+
+.chat-box .chat .message .avatar {
+  width: 38px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-box .chat .message.left .avatar {
+  background: blue;
+  color: #FFFFFF;
+}
+
+.chat-box .chat .message.right .avatar {
+  background: green;
+  color: #FFFFFF;
+}
+
+.chat-box .chat .message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-box .chat .message.right {
+  flex-direction: row-reverse;
+}
+
+.chat-box .chat .message.right span {
+  background: #000;
+  padding: 10px;
+  color: #FFFFFF;
+  border-radius: 7px;
+}
+
+.chat-box .chat .message.left span {
+  background: #000;
+  padding: 10px;
+  color: #FFFFFF;
+  border-radius: 7px;
+}
+
+.user-list {
+  position: relative;
+  height: 73vh;
+  overflow: scroll;
+}
+
+.user-list::-webkit-scrollbar {
+  width: 0px;
+}
+
+.user-list .user {
+  text-decoration: none;
+}
+
+.user-list .user .avatar {
+  width: 40px;
+  height: 50px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.user-list .user .name {
+  color: #000;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 450;
+}
+
+.user-list .user .message {
+  color: #000;
+  font-size: 14px;
+  opacity: .9;
+}
+
+.user-list .separator {
+  height: 1px;
+  width: 100%;
+  background: #eee;
+}
+
+.logout {
+  text-decoration: none;
+}
