@@ -3,7 +3,7 @@
 <h4 class="mt-2 mb-3">Users</h4>
 <div class="user-list">
   {% for user in users %}
-    <a class="user d-block mb-3" href="{% url 'chat' user %}">
+    <a class="user d-block mb-2 py-2 {% if user.username in request.path %}active{% endif %}" href="{% url 'chat' user %}">
       <div class="d-flex align-items-center gap-2">
         <div class="avatar d-flex align-items-center justify-content-center fw-bold text-white">{{user.username|upper|first}}</div>
         <div>
@@ -12,7 +12,7 @@
         </div>
       </div>
     </a>
-    <div class="separator mb-3"></div>
+    <div class="separator mb-2"></div>
   {% endfor %}
 </div>
 <a class="logout" href="{% url 'logout' %}">Logout</a>
