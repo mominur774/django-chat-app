@@ -15,7 +15,7 @@
               class="message mb-2 {% if chat.sender == request.user %}right{% else %}left{% endif %}"
             >
               <div class="avatar">{{chat.sender.username|first|upper}}</div>
-              <span class="d-block">{{chat.message}}</span>
+              <span title="{{chat.timestamp}}" class="d-block">{{chat.message}}</span>
             </div>
           {% endfor %}
         </div>
